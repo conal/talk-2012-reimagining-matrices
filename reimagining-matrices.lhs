@@ -26,16 +26,38 @@
 % Abbreviate date/venue to fit in infolines space
 \date{Nov 15, 2012}
 
-\begin{document}
-
-\frame{\titlepage}
-
 \nc\wfig[2]{
 \begin{center}
 \includegraphics[width=#1]{#2.jpg}
 \end{center}
 }
 \nc\fig[1]{\wfig{3in}{#1}}
+
+\begin{document}
+
+\frame{\titlepage
+% \vspace{-0.5in}
+\wfig{2.5in}{rabbit-face}
+}
+
+\frame{\frametitle{Reimagining}
+\vspace{0.6in}
+\begin{center}
+\begin{minipage}[t]{0.6\textwidth}
+\begin{center}
+{ \it
+The function of the imagination is not\\
+to make strange things settled, so much as\\
+to make settled things strange.
+}
+\end{center}
+\vspace{3ex}
+\begin{flushright}
+- G.K. Chesterton
+\end{flushright}
+\end{minipage}
+\end{center}
+}
 
 \frame{\frametitle{Matrices}
 \vspace{0.3in}
@@ -53,7 +75,8 @@ $$
 }
 
 \frame{\frametitle{Or maybe ...}
-\wfig{2in}{rabbit-hat-kid}
+% \wfig{2in}{rabbit-hat-kid}
+\wfig{2in}{rabbit-in-hat}
 }
 
 \frame{\frametitle{Matrices}
@@ -267,19 +290,18 @@ Addition:
 
 > (^+^) :: (a :-* b) -> (a :-* b) -> (a :-* b)
 
-\vspace{2ex}
+\vspace{1ex}
 
 Specification: 
 
 > apply (f ^+^ g) == apply f ^+^ apply g
 
-\vspace{2ex}
+\vspace{1.5ex}
 
 where, on functions,
 
-% > p ^+^ q == \ x -> p x ^+^ q x
-
-> (p ^+^ q) x == p x ^+^ q x
+> p ^+^ q  == \ x -> p x ^+^ q x
+>          == add . (p &&& q)
 
 }
 
@@ -299,12 +321,12 @@ where, on functions,
 >     apply ((f :&& g) ^+^ (h :&& k))
 > ==  (apply f &&& apply g) ^+^ (apply h &&& apply k)
 > ==  (apply f ^+^ apply h) &&& (apply g ^+^ apply k)
-> ==  apply ((f ^+^ h) &&& (g ^+^ k))
+> ==  apply ((f ^+^ h) :&& (g ^+^ k))
 
 \end{minipage}}
 \end{center}
 
-Other cases don't type-check.\\[2ex]
+Other two cases don't type-check.\\[2ex]
 
 Uses (on functions):
 
@@ -334,9 +356,9 @@ Specification:
 
 where, on functions,
 
-% > q . p == \ x -> q (p x)
+> q . p == \ x -> q (p x)
 
-> (q . p) x == q (p x)
+% > (q . p) x == q (p x)
 
 
 }
@@ -395,7 +417,9 @@ Uses:
 
 > dot (a,b)              == add . (dot a *** dot b)
 >
-> (k *** h) . (f &&& g)  == k . f &&& h . g
+> (k *** h) . (p &&& q)  == k . p &&& h . q
+>
+> add . (p &&& q)        == p ^+^ q
 >
 > apply (f ^+^ g)        == apply f ^+^ apply g
 
@@ -410,45 +434,23 @@ Implementation:
 
 \frame{\frametitle{Reflections}
 
+\begin{minipage}[c]{0.6\textwidth}
 \begin{itemize}
 
 \item Specify via semantic function.\vspace{2ex}
 \item Derive implementation.\vspace{2ex}
 \item Look for an elegant \emph{what} behind a familiar \emph{how}.
 
-\end{itemize}
-
 \out{
 \vspace{3ex}
-
 More examples: \href{http://conal.net/papers/type-class-morphisms/}{\emph{Denotational design with type class morphisms}}.
 }
 
-}
-
-\frame{\frametitle{Reimagining}
-\vspace{0.6in}
-\begin{center}
-\begin{minipage}[t]{0.6\textwidth}
-\begin{center}
-{ \it
-The function of the imagination is not\\
-to make strange things settled, so much as\\
-to make settled things strange.
-}
-\end{center}
-\vspace{3ex}
-\begin{flushright}
-- G.K. Chesterton
-\end{flushright}
+\end{itemize}
 \end{minipage}
-\end{center}
-}
-
-\frame{\frametitle{Reimagining}
-
-\vspace{2ex}
-\fig{yoda-unlearn}
+\begin{minipage}[c]{0.35\textwidth}
+\wfig{2in}{rabbit-reflection}
+\end{minipage}
 }
 
 \end{document}
