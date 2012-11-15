@@ -432,9 +432,12 @@ Implementation:
 }
 }
 
+{
+\usebackgroundtemplate{\includegraphics[width=1.2\textwidth]{rabbit-background}}
+
 \frame{\frametitle{Reflections}
 
-\begin{minipage}[c]{0.6\textwidth}
+\begin{minipage}[c]{0.5\textwidth}
 \begin{itemize}
 
 \item Specify via semantic function.\vspace{2ex}
@@ -445,12 +448,9 @@ Implementation:
 \vspace{3ex}
 More examples: \href{http://conal.net/papers/type-class-morphisms/}{\emph{Denotational design with type class morphisms}}.
 }
-
 \end{itemize}
 \end{minipage}
-\begin{minipage}[c]{0.35\textwidth}
-\wfig{2in}{rabbit-reflection}
-\end{minipage}
+}
 }
 
 \end{document}
