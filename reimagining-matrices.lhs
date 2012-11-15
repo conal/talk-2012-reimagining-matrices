@@ -136,6 +136,9 @@ $$
 
 \frame{\frametitle{Matrix multiplication}
 
+%\vspace{4.5ex}
+\vspace{1.5ex}
+
 If\\[2ex]
 $$
 \mathbf{A}=\begin{pmatrix}
@@ -154,10 +157,9 @@ $$
 (\mathbf{A \mmult B})_{ij} = \sum_{k=1}^m A_{ik} \cdot B_{kj}.
 $$
 \\[3ex]
-Dot product of each $\mathbf{A}$ row and $\mathbf{B}$ column.
-\\[3ex]
-\pause
 
+Dot product of each $\mathbf{A}$ row and $\mathbf{B}$ column.
+\pause
 \emph{Why}?
 
 }
