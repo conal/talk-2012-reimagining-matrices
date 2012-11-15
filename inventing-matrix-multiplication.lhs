@@ -8,7 +8,10 @@
 \usepackage{graphicx}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
-% \useoutertheme{infolines}
+\useinnertheme[shadow]{rounded}
+% \useoutertheme{default}
+\useoutertheme{shadow}
+\useoutertheme{infolines}
 
 \input{macros}
 
@@ -17,7 +20,7 @@
 %include greek.fmt
 %include mine.fmt
 
-\title{Inventing matrix multiplication}
+\title{Reimagining matrix operations}
 \author{Conal Elliott}
 \institute{Tabula}
 % Abbreviate date/venue to fit in infolines space
@@ -27,33 +30,144 @@
 
 \frame{\titlepage}
 
-\nc\ssection[1]{
-\section{#1}
-\frame{\begin{center}\vspace{3ex}
-\LARGE #1\end{center}}
+\nc\wfig[2]{
+\begin{center}
+\includegraphics[width=#1]{#2.jpg}
+\end{center}
 }
-\nc\ssubsection\subsection
-
-% \frame{\frametitle{Outline}\tableofcontents}
-
+\nc\fig[1]{\wfig{3in}{#1}}
 
 \frame{\frametitle{Matrices}
-
+\vspace{0.3in}
 $$
-\begin{pmatrix} a_{1 1} & \cdots & a_{1 m} \\
+\begin{pmatrix} A_{1 1} & \cdots & A_{1 m} \\
 \vdots & \ddots & \vdots \\
-a_{n 1} & \cdots & a_{n m} \end{pmatrix}
+A_{n 1} & \cdots & A_{n m} \end{pmatrix}
 $$
+}
+
+\frame{\frametitle{Matrices}
+% \pause
+\vspace{0.25in}
+\fig{old-hat}
+}
+
+\frame{\frametitle{Or maybe ...}
+\wfig{2in}{rabbit-hat-kid-crop}
+}
+
+\frame{\frametitle{Matrices}
+\vspace{0.3in}
+$$
+\begin{pmatrix} A_{1 1} & \cdots & A_{1 m} \\
+\vdots & \ddots & \vdots \\
+A_{n 1} & \cdots & A_{n m} \end{pmatrix}
+$$
+}
+
+\frame{\frametitle{Matrix addition}
+
+If\\[2ex]
+$$
+\mathbf{A}=\begin{pmatrix}
+ A_{11} & \cdots & A_{1m} \\
+\vdots & \ddots & \vdots \\
+ A_{n1} & \cdots & A_{nm} \\
+\end{pmatrix},\quad\mathbf{B}=\begin{pmatrix}
+ B_{11} & \cdots & B_{1m} \\
+\vdots & \ddots & \vdots \\
+ B_{n1} & \cdots & B_{nm} \\
+\end{pmatrix},
+$$
+\\[2ex]
+then
+$$
+\mathbf{A \mplus B}=\begin{pmatrix}
+ A_{11} + B_{11} & \cdots & A_{1m} + B_{1m} \\
+\vdots & \ddots & \vdots \\
+ A_{n1} + B_{n1} & \cdots & A_{nm} + B_{nm} \\
+\end{pmatrix}.
+$$
+}
+
+\frame{\frametitle{Matrix addition}
+
+If\\[2ex]
+$$
+\mathbf{A}=\begin{pmatrix}
+ A_{11} & \cdots & A_{1m} \\
+\vdots & \ddots & \vdots \\
+ A_{n1} & \cdots & A_{nm} \\
+\end{pmatrix},\quad\mathbf{B}=\begin{pmatrix}
+ B_{11} & \cdots & B_{1m} \\
+\vdots & \ddots & \vdots \\
+ B_{n1} & \cdots & B_{nm} \\
+\end{pmatrix},
+$$
+\\[2ex]
+then\\[3.7ex]
+$$
+(\mathbf{A \mplus B})_{ij} = A_{ij} + B_{ij}.
+$$
+}
+
+\frame{\frametitle{Matrix multiplication}
+
+If\\[2ex]
+$$
+\mathbf{A}=\begin{pmatrix}
+ A_{11} & \cdots & A_{1m} \\
+\vdots & \ddots & \vdots \\
+ A_{n1} & \cdots & A_{nm} \\
+\end{pmatrix},\quad\mathbf{B}=\begin{pmatrix}
+ B_{11} & \cdots & B_{1p} \\
+\vdots & \ddots & \vdots \\
+ B_{m1} & \cdots & B_{mp} \\
+\end{pmatrix},
+$$
+\\[2ex]
+then
+$$
+(\mathbf{A \mmult B})_{ij} = \sum_{k=1}^m A_{ik} \cdot B_{kj}.
+$$
+\\[3ex]
+Dot product of each $\mathbf{A}$ row and $\mathbf{B}$ column.
+\\[3ex]
+\pause
+
+\emph{Why}?
 
 }
 
 \frame{\frametitle{Matrix/vector multiplication}
 
+If\\[2ex]
+$$
+\mathbf{A}=\begin{pmatrix}
+ A_{11} & \cdots & A_{1m} \\
+\vdots & \ddots & \vdots \\
+ A_{n1} & \cdots & A_{nm} \\
+\end{pmatrix},\quad\mathbf{x}=\begin{pmatrix}
+ x_1 \\
+\vdots \\
+ x_m \\
+\end{pmatrix},
+$$
+\\[2ex]
+then
+$$
+(\mathbf{Ax})_{i} = \sum_{k=1}^m A_{ik} \cdot x_k.
+$$
+}
+
+
+\frame{\frametitle{Matrix/vector multiplication}
+
 $$
 \begin{array}{c}
-\begin{pmatrix} a_{1 1} & \cdots & a_{1 m} \\
+\begin{pmatrix} A_{1 1} & \cdots & A_{1 m} \\
 \vdots & \ddots & \vdots \\
-a_{n 1} & \cdots & a_{n m} \end{pmatrix}
+A_{n 1} & \cdots & A_{n m} \end{pmatrix}
 \begin{pmatrix}
   x_1\\
   x_2\\
@@ -62,21 +176,31 @@ a_{n 1} & \cdots & a_{n m} \end{pmatrix}
 \end{pmatrix}\\[10ex]
 = \\[4ex]
 \begin{pmatrix}
- a_{11} \cdot x_1 & + & \cdots & + & a_{1 n} \cdot x_n\\
+ A_{11} \cdot x_1 & + & \cdots & + & A_{1 n} \cdot x_n\\
  \vdots && \ddots && \vdots\\
- a_{m1} \cdot x_1 & + & \cdots & + & a_{mn} \cdot x_n\\
+ A_{m1} \cdot x_1 & + & \cdots & + & A_{mn} \cdot x_n\\
 \end{pmatrix}
 \end{array}
 $$
-\\[3ex]
-\pause
-
-Why?
-\pause
-What does it mean?
-
 }
 
+\frame{\frametitle{What's it all about?}
+\begin{itemize}
+\item 
+Matrices transform vectors.\\[4ex]
+% \pause
+\item 
+Matrix addition \emph{adds} transformations:
+$$\mathbf{(A \mplus B)\, x} = \mathbf{A\, x + B\, x}$$
+% \pause
+\item 
+Matrix ``multiplication'' \emph{composes} transformations:
+$$\mathbf{(A \mmult B)\, x} = \mathbf{A\, (B\, x)}$$
+% \pause
+\item What kinds of transformations?
+\end{itemize}
+
+}
 
 \frame{\frametitle{Linearity}
 
@@ -99,35 +223,11 @@ $$
 
 \ 
 
-\emph{Linear map} from $a$ to $b$: ``|a :-* b|''.
+We'll write ``|f :: a :-* b|''.
 
 }
 
-\frame{\frametitle{Multiplying matrices}
-
-If
-$$
-\mathbf{A}=\begin{pmatrix}
- A_{11} & \cdots & A_{1m} \\
-\vdots & \ddots & \vdots \\
- A_{n1} & \cdots & A_{nm} \\
-\end{pmatrix},\quad\mathbf{B}=\begin{pmatrix}
- B_{11} & \cdots & B_{1p} \\
-\vdots & \ddots & \vdots \\
- B_{m1} & \cdots & B_{mp} \\
-\end{pmatrix}
-$$
-\\[2ex]
-
-then\\[2ex]
-
-$$
-(\mathbf{AB})_{ij} = \sum_{k=1}^m A_{ik}B_{kj}
-$$
-
-}
-
-\frame{\frametitle{Represent as GADT}
+\frame{\frametitle{Representation}
 
 > data a :-* b where
 >   Dot    ::  InnerSpace b =>
@@ -135,25 +235,79 @@ $$
 >   (:&&)  ::  VS3 a c d =>  -- vector spaces with same scalar field
 >              (a :-* c) -> (a :-* d) -> (a :-* c :* d)
 
+\vspace{1ex}
+
+Generalized algebraic data type (GADT).
+
 }
 
 \frame{\frametitle{Semantics}
 
-> apply :: (a :-* b) -> (a -> b)
-> apply (Dot b)    = dot b
-> apply (f :&& g)  = apply f &&& apply g
-
-where, on functions,
-
-> (f &&& g) a = (f a, g a)
-
-Recall:
+Representation:
 
 > data a :-* b where
 >   Dot    ::  InnerSpace b  => b -> (b :-* Scalar b)
 >   (:&&)  ::  VS3 a c d     => (a :-* c) -> (a :-* d) -> (a :-* c :* d)
 
+Semantics:
+
+> apply :: (a :-* b) -> (a -> b)
+> apply (Dot b)    = dot b
+> apply (f :&& g)  = apply f &&& apply g
+
+where
+
+> (f &&& g) a = (f a, g a)
+
 }
+
+\frame{\frametitle{Adding linear maps}
+
+Specification: 
+
+> apply (f ^+^ g) == apply f ^+^ apply g
+
+where, on functions,
+
+> p ^+^ q == \ x -> p x ^+^ q x
+
+}
+
+\frame{\frametitle{Deriving addition}
+
+\begin{center}
+\fbox{\begin{minipage}[t]{0.35\textwidth}
+
+>     apply (Dot b ^+^ Dot c)
+> ==  dot b ^+^ dot c
+> ==  dot (b ^+^ c)
+> ==  apply (Dot (b ^+^ c))
+
+\end{minipage}}
+\fbox{\begin{minipage}[t]{0.5\textwidth}
+
+>     apply ((f :&& g) ^+^ (h :&& k))
+> ==  (apply f &&& apply g) ^+^ (apply h &&& apply k)
+> ==  (apply f ^+^ apply h) &&& (apply g ^+^ apply k)
+> ==  apply ((f ^+^ h) &&& (g ^+^ k))
+
+\end{minipage}}
+\end{center}
+
+Other cases don't type-check.\\[2ex]
+
+Uses (on functions):
+
+> (f &&& g) ^+^ (h &&& k) == (f ^+^ h) &&& (g ^+^ k)
+
+Proof:
+
+> ((f &&& g) ^+^ (h &&& k)) x  == (f x, g x) ^+^ (h x, k x)
+>                              == (f x ^+^ h x, g x ^+^ k x)
+>                              == ((f ^+^ h) &&& (g ^+^ k)) x
+
+}
+
 \frame{\frametitle{Composing linear maps}
 
 The specification:
@@ -165,11 +319,13 @@ The specification:
 \end{center}
 
 }
-\frame{\frametitle{Deriving a |Category| instance}
 
-One case:
+\frame{\frametitle{Deriving composition}
+
+Two constructors, four cases.
+First two:
 \begin{center}
-\fbox{\begin{minipage}[t]{0.45\textwidth}
+\fbox{\begin{minipage}[t]{0.4\textwidth}
 
 >     apply ((f :&& g) .@ h)
 > ==  (apply f &&& apply g) . apply h
@@ -189,8 +345,9 @@ Implementation:
 >   (f :&& g) .@ h = f .@ h :&& g .@ h
 
 }
-\frame{\frametitle{Deriving a |Category| instance}
+\frame{\frametitle{Deriving composition}
 
+Other two cases:
 \begin{center}
 \fbox{\begin{minipage}[t]{0.35\textwidth}
 
@@ -234,15 +391,43 @@ Implementation:
 
 \begin{itemize}
 
-\item Find the elegant \emph{what} behind a familiar \emph{how}.
-\item Specify via semantic function.
-\item Derive implementation.
+\item Specify via semantic function.\vspace{2ex}
+\item Derive implementation.\vspace{2ex}
+\item Look for an elegant \emph{what} behind a familiar \emph{how}.
 
 \end{itemize}
-\ \\[3ex]
 
-More examples: \href{http://conal.net/papers/type-class-morphisms/}{\emph{Denotational design with type class morphisms}}
+\out{
+\vspace{3ex}
 
+More examples: \href{http://conal.net/papers/type-class-morphisms/}{\emph{Denotational design with type class morphisms}}.
+}
+
+}
+
+\frame{\frametitle{Reimagining}
+\vspace{0.6in}
+\begin{center}
+\begin{minipage}[t]{0.6\textwidth}
+\begin{center}
+{ \it
+The function of the imagination is not\\
+to make strange things settled, so much as\\
+to make settled things strange.
+}
+\end{center}
+\vspace{3ex}
+\begin{flushright}
+- G.K. Chesterton
+\end{flushright}
+\end{minipage}
+\end{center}
+}
+
+\frame{\frametitle{Reimagining}
+
+\vspace{2ex}
+\fig{yoda-unlearn}
 }
 
 \end{document}
