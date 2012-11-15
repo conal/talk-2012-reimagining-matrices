@@ -1,4 +1,4 @@
-TARG = inventing-matrix-multiplication
+TARG = reimagining-matrices
 
 .PRECIOUS: %.tex %.pdf
 

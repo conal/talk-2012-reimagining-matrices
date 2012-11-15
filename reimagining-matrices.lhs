@@ -20,7 +20,7 @@
 %include greek.fmt
 %include mine.fmt
 
-\title{Reimagining matrix operations}
+\title{Reimagining matrices}
 \author{Conal Elliott}
 \institute{Tabula}
 % Abbreviate date/venue to fit in infolines space
@@ -53,7 +53,7 @@ $$
 }
 
 \frame{\frametitle{Or maybe ...}
-\wfig{2in}{rabbit-hat-kid-crop}
+\wfig{2in}{rabbit-hat-kid}
 }
 
 \frame{\frametitle{Matrices}
@@ -209,7 +209,7 @@ Linear functions/maps/transformations:
 $$
 \begin{array}{rcl}
 f\,\, (x+y) &=& f\, x + f\, y\\
-f\,\, (\alpha \cdot x) &=& \alpha \cdot f\, x
+f\,\, (c \cdot x) &=& c \cdot f\, x
 \end{array}
 $$
 
@@ -218,7 +218,7 @@ $$
 Equivalently, $f$ preserves \emph{linear combinations}:
 
 $$
-f\, (a_1 \cdot x_1+\cdots+a_m \cdot x_m) = a_1 \cdot f\, x_1+\cdots+a_m \cdot f\, x_m
+f\, (c_1 \cdot x_1+\cdots+c_m \cdot x_m) = c_1 \cdot f\, x_1+\cdots+c_m \cdot f\, x_m
 $$
 
 \ 
@@ -263,13 +263,23 @@ where
 
 \frame{\frametitle{Adding linear maps}
 
+Addition:
+
+> (^+^) :: (a :-* b) -> (a :-* b) -> (a :-* b)
+
+\vspace{2ex}
+
 Specification: 
 
 > apply (f ^+^ g) == apply f ^+^ apply g
 
+\vspace{2ex}
+
 where, on functions,
 
-> p ^+^ q == \ x -> p x ^+^ q x
+% > p ^+^ q == \ x -> p x ^+^ q x
+
+> (p ^+^ q) x == p x ^+^ q x
 
 }
 
@@ -310,13 +320,24 @@ Proof:
 
 \frame{\frametitle{Composing linear maps}
 
-The specification:
+Composition:
 
-\begin{center}
+> (.@) :: (b :-* c) -> (a :-* b) -> (a :-* c)
+
+\vspace{2ex}
+
+Specification:
 
 > apply (g .@ f) == apply g . apply f
 
-\end{center}
+\vspace{2ex}
+
+where, on functions,
+
+% > q . p == \ x -> q (p x)
+
+> (q . p) x == q (p x)
+
 
 }
 
