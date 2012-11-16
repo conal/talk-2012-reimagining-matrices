@@ -22,3 +22,16 @@ Questions:
 *   What's the difference between matrices and arrays?
 *   What makes matrices useful in linear algebra?
 *   Pre- or post-multiply?
+
+# Image credits
+
+*   rabbit-face: many sites, including [Calgary Humane](http://www.calgaryhumane.ca/page.aspx?pid=369), which has many other animal pictures with white backgrounds.
+    Probably clear.
+*   old-hat: [Ed100](http://www.ed100.org/edprezi/old-hat/).
+    Looks clear.
+*   rabbit-in-hat: [BJD Group Insider](http://blog.bjdgroup.com/2012/11/05/temp-and-interim-tax-scare/).
+    Looks clear.
+*   rabbit-hat-kid: Many sites, including [Amazing Magic Tricks](http://amazingmagictricks.net/magic-tricks-for-children/).
+*   rabbit-background: Many sites, including [Only HD Wallpapers](http://onlyhdwallpapers.com/high-definition-wallpaper/bunnies-desktop-hd-wallpaper-874367/)
+*   rabbit-hopping-on-grass: [Flickr](http://www.flickr.com/photos/edwardkaye/2402986746/in/pool-81431815@N00/), All rights reserved.
+*   rabbit-rear: removed

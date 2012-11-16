@@ -6,6 +6,7 @@
 \usepackage{beamerthemesplit}
 
 \usepackage{graphicx}
+\usepackage{color}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg}
 
 \useinnertheme[shadow]{rounded}
@@ -21,17 +22,28 @@
 %include mine.fmt
 
 \title{Reimagining matrices}
-\author{Conal Elliott}
-\institute{Tabula}
+\author{\href{http://conal.net}{Conal Elliott}}
+\institute{\href{http://tabula.com/}{Tabula}}
 % Abbreviate date/venue to fit in infolines space
-\date{Nov 15, 2012}
+\date{\href{http://www.meetup.com/haskellhackersathackerdojo/events/88293102/}{Nov 15, 2012}}
+
+\nc\wpicture[2]{\includegraphics[width=#1]{#2}}
+% \nc\wpicture[2]{}
 
 \nc\wfig[2]{
 \begin{center}
-\includegraphics[width=#1]{#2.jpg}
+\wpicture{#1}{#2}
 \end{center}
 }
 \nc\fig[1]{\wfig{3in}{#1}}
+
+%% \nc\fb[1]{\fbox{#1\vspace{-2ex}}}
+
+\nc\usebg[1]{
+\usebackgroundtemplate{\wpicture{1.2\textwidth}{#1}}
+}
+
+\setlength{\itemsep}{2ex}
 
 \begin{document}
 
@@ -75,7 +87,6 @@ $$
 }
 
 \frame{\frametitle{Or maybe ...}
-% \wfig{2in}{rabbit-hat-kid}
 \wfig{2in}{rabbit-in-hat}
 }
 
@@ -212,7 +223,8 @@ $$
 \frame{\frametitle{What's it all about?}
 \begin{itemize}
 \item 
-Matrices transform vectors.\\[4ex]
+Matrices \emph{transform} vectors:
+$$\mathbf{y} = \mathbf{A\, x}$$
 % \pause
 \item 
 Matrix addition \emph{adds} transformations:
@@ -227,9 +239,9 @@ $$\mathbf{(A \mmult B)\, x} = \mathbf{A\, (B\, x)}$$
 
 }
 
-\frame{\frametitle{Linearity}
+\frame{\frametitle{Linear transformations}
 
-Linear functions/maps/transformations:
+\emph{Linearity} of $f$:
 
 $$
 \begin{array}{rcl}
@@ -435,24 +447,126 @@ Implementation:
 }
 
 {
-\usebackgroundtemplate{\includegraphics[width=1.2\textwidth]{rabbit-background}}
+\usebg{rabbit-background}
 
 \frame{\frametitle{Reflections}
 
-\begin{minipage}[c]{0.5\textwidth}
 \begin{itemize}
 
-\item Specify via semantic function.\vspace{2ex}
-\item Derive implementation.\vspace{2ex}
-\item Look for an elegant \emph{what} behind a familiar \emph{how}.
+\setlength{\itemsep}{3ex}
+
+\item Look for an elegant \emph{what}\\ behind a familiar \emph{how}.
+\item \emph{Define} semantic function.
+\item \emph{Derive} implementation.
 
 \out{
 \vspace{3ex}
 More examples: \href{http://conal.net/papers/type-class-morphisms/}{\emph{Denotational design with type class morphisms}}.
 }
 \end{itemize}
-\end{minipage}
 }
+}
+
+
+{
+\usebg{rabbit-hopping-on-grass}
+
+\frame{
+\vspace{2.25in}
+\hspace{0.75in}{\LARGE \textcolor{white}{Outtakes}}
+
+\vspace{0.5in}
+\begin{flushright}
+\href{http://www.flickr.com/photos/edwardkaye/2402986746/}{\tiny\it\textcolor{white}{photo credit}}
+\end{flushright}
+}
+}
+
+\begin{frame}\frametitle{Cross products}
+
+> (***) :: (a :-* c) -> (b :-* d) -> (a :* b :-* c :* d)
+
+\vspace{1ex}
+
+Semantics:
+
+> apply (f *** g) = apply f *** apply g
+
+\vspace{1ex}
+
+Where, on functions,
+
+> p *** q  =   \ (a,b) -> (p a, q b)
+>          ==  p . fst &&& q . snd
+
+\end{frame}
+
+\begin{frame}\frametitle{Deriving cross products}
+
+\begin{center}
+\fbox{\begin{minipage}[t]{0.5\textwidth}
+
+>     apply (f *** g)
+> ==  apply f *** apply g
+> ==  apply f . fst &&& apply g . snd
+> ==  apply (compFst f) &&& apply (compSnd g)
+> ==  apply (compFst f :&& compSnd g)
+
+\end{minipage}}
+\end{center}
+
+\begin{minipage}{0.5\textwidth}
+
+assuming
+
+> apply (compFst  f)  == apply f  . fst
+> apply (compSnd  g)  == apply g  . snd
+
+\end{minipage}
+\pause
+\hspace{0.2\textwidth}
+\begin{minipage}{0.25\textwidth}
+\wfig{1.5in}{rabbit-hat-kid}
+\end{minipage}
+
+\out{
+Uses:
+
+> f *** g == f . fst &&& g . snd
+
+}
+
+\end{frame}
+
+\frame{\frametitle{Composing with |fst| and |snd|}
+
+\out{
+
+> compFst  :: VS3 a b c => a :-* c -> a :* b :-* c
+> compSnd  :: VS3 a b c => b :-* c -> a :* b :-* c
+
+}
+
+Derivation:
+
+\begin{center}
+\fbox{\begin{minipage}[t]{0.5\textwidth}
+
+> dot a      . fst  == dot (a,0)
+>
+> (f &&& g)  . fst  == f . fst &&& g . fst
+
+\end{minipage}}
+\end{center}
+
+Implementation:
+
+> compFst  (Dot a)    = Dot (a,zeroV)
+> compFst  (f :&& g)  = compFst f &&& compFst g
+> SPACE
+> compSnd  (Dot b)    = Dot (zeroV,b)
+> compSnd  (f :&& g)  = compSnd f &&& compSnd g
+
 }
 
 \end{document}

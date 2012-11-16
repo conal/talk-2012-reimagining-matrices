@@ -1,6 +1,6 @@
 TARG = reimagining-matrices
 
-.PRECIOUS: %.tex %.pdf
+.PRECIOUS: %.tex %.pdf %.web
 
 all: $(TARG).pdf
 
@@ -21,6 +21,12 @@ showpdf = open -a Skim.app
 
 clean:
 	rm $(TARG).{tex,pdf,aux,nav,snm,ptb}
+
+# web: $(TARG).web
+
+# %.web: %.pdf
+# 	scp $< conal@conal.net:/home/conal/web/talks
+# 	touch $@
 
 web: web-token
 
