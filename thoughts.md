@@ -12,6 +12,9 @@ Consequently, programming tends to proceed haphazardly via guesses, hand-waved j
 This talk illustrates an alternative, which is principled derivation of implementations from specifications, via the example of matrix operations.
 The techniques used are widely applicable as means to discover correct algorithms and to more deeply understand known algorithms.
 
+Retitled: Reimagining matrices.
+Revisit the abstract when I give this talk again.
+
 # Miscellany
 
 Questions:

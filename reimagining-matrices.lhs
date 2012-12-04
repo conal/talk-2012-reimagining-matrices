@@ -165,7 +165,7 @@ $$
 \\[2ex]
 then
 $$
-(\mathbf{A \mmult B})_{ij} = \sum_{k=1}^m A_{ik} \cdot B_{kj}.
+(\mathbf{A} \mmult \mathbf{B})_{ij} = \sum_{k=1}^m A_{ik} \cdot B_{kj}.
 $$
 \\[3ex]
 
@@ -192,7 +192,7 @@ $$
 \\[2ex]
 then
 $$
-(\mathbf{Ax})_{i} = \sum_{k=1}^m A_{ik} \cdot x_k.
+(\mathbf{A\,x})_{i} = \sum_{k=1}^m A_{ik} \cdot x_k.
 $$
 }
 
@@ -208,13 +208,13 @@ A_{n 1} & \cdots & A_{n m} \end{pmatrix}
   x_1\\
   x_2\\
   \vdots\\
-  x_n
+  x_m
 \end{pmatrix}\\[10ex]
 = \\[4ex]
 \begin{pmatrix}
- A_{11} \cdot x_1 & + & \cdots & + & A_{1 n} \cdot x_n\\
+ A_{1 1} \cdot x_1 & + & \cdots & + & A_{1 m} \cdot x_m\\
  \vdots && \ddots && \vdots\\
- A_{m1} \cdot x_1 & + & \cdots & + & A_{mn} \cdot x_n\\
+ A_{n 1} \cdot x_1 & + & \cdots & + & A_{n m} \cdot x_m\\
 \end{pmatrix}
 \end{array}
 $$
