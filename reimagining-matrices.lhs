@@ -80,7 +80,7 @@ A_{n 1} & \cdots & A_{n m} \end{pmatrix}
 $$
 }
 
-\frame{\frametitle{Matrices}
+\frame{\frametitle{Matrices -- old hat}
 % \pause
 \vspace{0.25in}
 \fig{old-hat}
@@ -116,7 +116,7 @@ $$
 \\[2ex]
 then
 $$
-\mathbf{A \mplus B}=\begin{pmatrix}
+\mathbf{A \mplus B}=\pause \begin{pmatrix}
  A_{11} + B_{11} & \cdots & A_{1m} + B_{1m} \\
 \vdots & \ddots & \vdots \\
  A_{n1} + B_{n1} & \cdots & A_{nm} + B_{nm} \\
